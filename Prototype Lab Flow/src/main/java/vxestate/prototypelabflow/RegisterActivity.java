@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     String code = jsonObject.getString("code");
                                     String message = jsonObject.getString("message");
                                     builder.setTitle("Information");
-                                    builder.setMessage("Registered Successfully");
+                                    builder.setMessage(message);
                                     displayAlert(code);
                                 } catch (JSONException e) {
                                     e.printStackTrace();

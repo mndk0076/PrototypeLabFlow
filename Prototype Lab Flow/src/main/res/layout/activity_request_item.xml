@@ -52,10 +52,10 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/item1minusbtn"
                     android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:layout_width="wrap_content"
                     android:backgroundTint="@android:color/holo_red_light"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:layout_width="60dp" />
 
                 <TextView
                     android:text="0"
@@ -64,16 +64,16 @@
                     android:id="@+id/item1quantity"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
 
                 <Button
                     android:text="+"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/item1plusbtn"
                     android:backgroundTint="@android:color/holo_green_light"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:layout_width="60dp" />
 
                 <Button
                     android:text="Request Item"
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/item2minusbtn"
                     android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:backgroundTint="@android:color/holo_red_light"
                     android:textSize="20sp"
                     android:textColor="@color/white" />
@@ -127,12 +127,12 @@
                     android:id="@+id/item2quantity"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
 
                 <Button
                     android:text="+"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/item2plusbtn"
                     android:backgroundTint="@android:color/holo_green_light"
