@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="exit_prompt_no">Non</string>
+    <string name="exit_prompt_yes">Oui</string>
+    <string name="about_us">Prototype Lab Flow vous est présenté par l\'équipe de développement de V / X Estate LLC. Nous sommes un trio de troisième année Computer Engineering étudiants qui s\'efforcent de rendre everyones vie plus facile et pratique grâce à l\'utilisation de cette application. J\'espère que vous avez eu une expérience merveilleuse. Bonnes vacances! \\n\\nCordialement\\nKenneth\\nSukhdeep\\nMatheus</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="exit_prompt_msg">Voulez-vous vraiment quitter cette application?</string>
+    <string name="exit_prompt_title">Confirmation de sortie</string>
+    <string name="scan_cancelled">Annulation de la numérisation</string>
+    <string name="scan_continue">Passez à Scanner</string>
+    <string name="scan_instructions">Pour numériser des codes QR, vous devez autoriser l\'utilisation de l\'appareil photo. Pendant la numérisation, assurez-vous que le code QR est à au moins trois pouces du capteur de la caméra dans un environnement bien éclairé.</string>
+</resources>

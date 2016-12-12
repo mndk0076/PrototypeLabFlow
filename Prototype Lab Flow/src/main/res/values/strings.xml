@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name" translatable="false">Prototype Lab Flow</string>
+    <string name="title_activity_login_success">LoginSuccess</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="scan_cancelled">Scanning Cancelled</string>
+    <string name="scan_continue">Proceed to Scanner</string>
+    <string name="scan_instructions">In order to scan QR codes, you must grant permission to use camera. While Scanning make sure the QR code is at least three inches away from the camera sensor inside a well lit environment.</string>
+    <string name="qrDisplay" translatable="false" />
+    <string name="about_us">Prototype Lab Flow is brought to you by the awesome development team of V/X Estate LLC. We are a trio of third-year Computer Engineering students who strive to make everyones lives easier and convenient through the use of this application. Hope you had a wonderful experience. Happy Holidays!\n\nBest Regards\nKenneth\nSukhdeep\nMatheus</string>
+    <string name="exit_prompt_title">Exit Confirmation</string>
+    <string name="exit_prompt_msg"> Are you sure you want to exit this application?</string>
+    <string name="exit_prompt_yes">Yes</string>
+    <string name="exit_prompt_no">No</string>
+</resources>
