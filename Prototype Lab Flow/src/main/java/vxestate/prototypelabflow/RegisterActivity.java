@@ -1,7 +1,7 @@
 package vxestate.prototypelabflow;
 //Kenneth Mendoza(N00598007)
 //Sukhdeep Sehra (N01046228)
-//Matheus Almeida
+//Matheus Almeida (N00739768)
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;

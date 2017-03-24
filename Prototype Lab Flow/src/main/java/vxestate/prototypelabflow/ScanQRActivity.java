@@ -1,9 +1,10 @@
 package vxestate.prototypelabflow;
 //Kenneth Mendoza(N00598007)
 //Sukhdeep Sehra (N01046228)
-//Matheus Almeida
+//Matheus Almeida (N00739768)
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -12,25 +13,40 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class ScanQRActivity extends AppCompatActivity {
 
     private DrawerLayout mdrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     NavigationView navigationView;
-    TextView qrDisplay, student_num;
+    TextView qrDisplay, student_num, test;
     String Student_Num;
+    EditText text;
+    Button gen_btn;
+    ImageView image;
+    String text2Qr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_qr);
-        qrDisplay = (TextView)findViewById(R.id.qrDisplay);
+        //qrDisplay = (TextView)findViewById(R.id.qrDisplay);
+
+
+
 
 
         student_num = (TextView)findViewById(R.id.student_num);
@@ -38,6 +54,23 @@ public class ScanQRActivity extends AppCompatActivity {
         student_num.setText(bundle.getString("student_num"));
 
         Student_Num = student_num.getText().toString();
+
+        image = (ImageView) findViewById(R.id.image);
+
+
+        text2Qr = Student_Num;
+                //student_num.getText().toString().trim();
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try{
+            BitMatrix bitMatrix = multiFormatWriter.encode(text2Qr, BarcodeFormat.QR_CODE,200,200);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            image.setImageBitmap(bitmap);
+        }
+        catch (WriterException e){
+            e.printStackTrace();
+        }
+
 
         mdrawerLayout = (DrawerLayout)findViewById(R.id.activity_scan_qr);
         mDrawerToggle = new ActionBarDrawerToggle(this, mdrawerLayout,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -93,6 +126,8 @@ public class ScanQRActivity extends AppCompatActivity {
         });
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mDrawerToggle.onOptionsItemSelected(item)){
@@ -101,38 +136,5 @@ public class ScanQRActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    //scan QR
-    public void scanIt(View view) {
-        final Activity activity = this;
-        IntentIntegrator integrator = new IntentIntegrator(activity);
-        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-        integrator.setCameraId(0);
-        integrator.setPrompt("Place a QR Code inside the viewfinder area to scan it.");
-        integrator.setBeepEnabled(false);
-        integrator.setBarcodeImageEnabled(false);
-        integrator.initiateScan();
-    }
-
-    // scan and show as toast
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null){
-            if(result.getContents()==null){
-                Toast.makeText(this, (R.string.scan_cancelled), Toast.LENGTH_LONG).show();
-            }
-            else {
-                String display = "";
-                display = result.getContents().toString();
-                qrDisplay.setText("You've scanned: "+display);
-                //Toast.makeText(this, result.getContents(),Toast.LENGTH_LONG).show();
-            }
-        }
-        else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
 
 }
