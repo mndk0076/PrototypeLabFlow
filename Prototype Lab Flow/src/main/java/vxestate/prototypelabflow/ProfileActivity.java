@@ -22,7 +22,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     NavigationView navigationView;
     Toolbar toolbar;
-    String test, student_Num;
+    String test, student_Num, name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         if(bundle != null) {
-            full_name.setText("Welcome: " + bundle.getString("first_name") + " " + bundle.getString("last_name"));
+            full_name.setText(bundle.getString("first_name") + " " + bundle.getString("last_name"));
             username.setText("Username: " + bundle.getString("username"));
             student_num.setText(bundle.getString("student_num"));
         }
@@ -71,6 +71,8 @@ public class ProfileActivity extends AppCompatActivity {
                 */
 
         student_Num = student_num.getText().toString();
+        name = full_name.getText().toString();
+
 
         mdrawerLayout = (DrawerLayout)findViewById(R.id.activity_profile);
         mDrawerToggle = new ActionBarDrawerToggle(this, mdrawerLayout,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -103,9 +105,10 @@ public class ProfileActivity extends AppCompatActivity {
                         startActivity(qrIntent);
                         break;
                     case R.id.nav_schedule:
-                        Intent scheduleIntent = new Intent(getApplicationContext(), ScheduleActivity.class);
+                        Intent scheduleIntent = new Intent(getApplicationContext(), TimeSlotActivity.class);
                         Bundle scheduleBundle = new Bundle();
                         scheduleBundle.putString("student_num", student_Num);
+                        scheduleBundle.putString("name", name);
                         scheduleIntent.putExtras(scheduleBundle);
                         startActivity(scheduleIntent);
                         break;

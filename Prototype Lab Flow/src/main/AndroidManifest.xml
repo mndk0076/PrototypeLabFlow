@@ -29,10 +29,18 @@
         <activity
             android:name=".ScheduleActivity"
             android:label="Schedule" />
-        <activity android:name=".ScanQRActivity"
-            android:label="Scan QR Codes"/>
-        <activity android:name=".AboutUsActivity"
-            android:label="About Us"></activity>
+        <activity
+            android:name=".ScanQRActivity"
+            android:label="Scan QR Codes" />
+        <activity
+            android:name=".AboutUsActivity"
+            android:label="About Us" />
+        <activity android:name=".TimeSlotActivity" />
+        <activity android:name=".BookTimeActivity"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
