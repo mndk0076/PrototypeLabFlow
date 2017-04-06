@@ -1,12 +1,8 @@
 package vxestate.prototypelabflow;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
-import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -16,40 +12,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class TimeSlotActivity extends AppCompatActivity {
     private DrawerLayout mdrawerLayout;
@@ -194,7 +168,7 @@ public class TimeSlotActivity extends AppCompatActivity {
         public View getView(final int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.slot_available, null);
             TextView textView_name = (TextView)view.findViewById(R.id.slot);
-            TextView textView_description = (TextView)view.findViewById(R.id.time);
+            TextView textView_description = (TextView)view.findViewById(R.id.myAppointment);
             Button btnBook = (Button)view.findViewById(R.id.bookBtn);
 
             textView_name.setText(slot[i]);
