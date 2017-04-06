@@ -10,10 +10,23 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,17 +52,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TimeSlotActivity extends AppCompatActivity {
+    private DrawerLayout mdrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    NavigationView navigationView;
     TextView student_num, name;
     TextView test;
     Button mon_slot1, mon_slot2;
     String NAME, STUDENT_NUM, Date, Time, Slot_Remaining, TEST;
     String bookflow_url = "http://prototypelabflow.esy.es/BookFlow.php";
-    String date = "03/30/2017", time = "8:00-9:45 AM";
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    String DATE;
+
+    String[] slot = {"Slot 1:", "Slot 2:", "Slot 3:"};
+    String[] times = {"8:00 AM - 9:45 AM", "9:50 AM - 11:35 AM", "11:40 AM - 12:25 PM"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,163 +93,128 @@ public class TimeSlotActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(TimeSlotActivity.this);
+                View view = getLayoutInflater().inflate(R.layout.dialog_schedule, null);
+
+                ListView listView = (ListView)view.findViewById(R.id.Listview);
+                CustomAdapter customAdapter = new CustomAdapter();
+                listView.setAdapter(customAdapter);
+
+                mBuilder.setView(view);
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
 
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-                String DATE = simpleDateFormat.format(date.getDate());
-                Intent scheduleIntent = new Intent(getApplicationContext(), BookTimeActivity.class);
-                Bundle scheduleBundle = new Bundle();
-                scheduleBundle.putString("student_num", STUDENT_NUM);
-                scheduleBundle.putString("name", NAME);
-                scheduleBundle.putString("date", DATE);
-                scheduleIntent.putExtras(scheduleBundle);
-                startActivity(scheduleIntent);
+                DATE = simpleDateFormat.format(date.getDate());
             }
         });
 
-        /*
-        student_num = (TextView)findViewById(R.id.student_num);
-        name = (TextView)findViewById(R.id.name);
-        mon_slot1 = (Button)findViewById(R.id.mon_slot1);
-        mon_slot2 = (Button)findViewById(R.id.mon_slot2);
-        test = (TextView)findViewById(R.id.test);
+        mdrawerLayout = (DrawerLayout)findViewById(R.id.activity_time_slot);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mdrawerLayout,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
-        Bundle bundle = getIntent().getExtras();
-        student_num.setText(bundle.getString("student_num"));
-        name.setText(bundle.getString("name"));
+        mdrawerLayout.addDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        mon_slot1.setOnClickListener(new View.OnClickListener() {
+        navigationView = (NavigationView)findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, bookflow_url, new Response.Listener<String>(){
-                    @Override
-                    public void onResponse(String response){
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            JSONObject jsonObject = jsonArray.getJSONObject(0);
-                            Slot_Remaining = jsonObject.getString("total");
-                            SharedPreferences sharedPref = getSharedPreferences("data", Context.MODE_PRIVATE);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.nav_account:
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        break;
+                    case R.id.nav_request:
+                        Intent requestIntent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
+                        Bundle requestBundle = new Bundle();
+                        requestBundle.putString("student_num", STUDENT_NUM);
+                        requestIntent.putExtras(requestBundle);
+                        startActivity(requestIntent);
+                        break;
+                    case R.id.nav_scan:
+                        Intent qrIntent = new Intent(getApplicationContext(), ScanQRActivity.class);
+                        Bundle qrBundle = new Bundle();
+                        qrBundle.putString("student_num", STUDENT_NUM);
+                        qrIntent.putExtras(qrBundle);
+                        startActivity(qrIntent);
+                        break;
+                    case R.id.nav_schedule:
+                        Intent scheduleIntent = new Intent(getApplicationContext(), TimeSlotActivity.class);
+                        Bundle scheduleBundle = new Bundle();
+                        scheduleBundle.putString("student_num", STUDENT_NUM);
+                        scheduleBundle.putString("name", NAME);
+                        scheduleIntent.putExtras(scheduleBundle);
+                        startActivity(scheduleIntent);
+                        break;
+                    case R.id.nav_about:
+                        Intent usIntent = new Intent(getApplicationContext(), AboutUsActivity.class);
+                        Bundle usBundle = new Bundle();
+                        usBundle.putString("student_num", STUDENT_NUM);
+                        usIntent.putExtras(usBundle);
+                        startActivity(usIntent);
+                        break;
+                    case R.id.nav_logout:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        break;
+                }
 
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putString("username", NAME);
-                            editor.putString("studenr_num", STUDENT_NUM);
-                            editor.putString("date", "3/30/2017");
-                            editor.putString("time", "8:00-9:45 AM");
-                            editor.putString("slot", Slot_Remaining);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error){
-                        Toast.makeText(TimeSlotActivity.this,"Error",Toast.LENGTH_LONG).show();
-                        error.printStackTrace();
-                    }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("date", date);
-                        params.put("time", time);
-                        return params;
-                    }
-                };
-                MySingleton.getMyInstance(TimeSlotActivity.this).addToRequestque(stringRequest);
-
-
-
-                Intent scheduleIntent = new Intent(getApplicationContext(), BookTimeActivity.class);
-                startActivity(scheduleIntent);
-
-
-                Intent scheduleIntent = new Intent(getApplicationContext(), BookTimeActivity.class);
-                Bundle scheduleBundle = new Bundle();
-                scheduleBundle.putString("student_num", STUDENT_NUM);
-                scheduleBundle.putString("name", NAME);
-                scheduleBundle.putString("date", "3/30/2017");
-                scheduleBundle.putString("time", "8:00-9:45 AM");
-                scheduleIntent.putExtras(scheduleBundle);
-                startActivity(scheduleIntent);
-
+                return true;
             }
         });
-
-        mon_slot2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, bookflow_url, new Response.Listener<String>(){
-                    @Override
-                    public void onResponse(String response){
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            JSONObject jsonObject = jsonArray.getJSONObject(0);
-                            Slot_Remaining = jsonObject.getString("total");
-                            test.setText(Slot_Remaining);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error){
-                        Toast.makeText(TimeSlotActivity.this,"Error",Toast.LENGTH_LONG).show();
-                        error.printStackTrace();
-                    }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("date", date);
-                        params.put("time", time);
-                        return params;
-                    }
-                };
-                MySingleton.getMyInstance(TimeSlotActivity.this).addToRequestque(stringRequest);
-            }
-        });
-        */
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("TimeSlot Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+        return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
+    class CustomAdapter extends BaseAdapter {
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
+        @Override
+        public int getCount() {
+            return slot.length;
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(final int i, View view, ViewGroup viewGroup) {
+            view = getLayoutInflater().inflate(R.layout.slot_available, null);
+            TextView textView_name = (TextView)view.findViewById(R.id.slot);
+            TextView textView_description = (TextView)view.findViewById(R.id.time);
+            Button btnBook = (Button)view.findViewById(R.id.bookBtn);
+
+            textView_name.setText(slot[i]);
+            textView_description.setText(times[i]);
+
+            btnBook.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    Intent scheduleIntent = new Intent(getApplicationContext(), BookTimeActivity.class);
+                    Bundle scheduleBundle = new Bundle();
+                    scheduleBundle.putString("student_num", STUDENT_NUM);
+                    scheduleBundle.putString("name", NAME);
+                    scheduleBundle.putString("date", DATE);
+                    scheduleBundle.putString("time", times[i]);
+                    scheduleIntent.putExtras(scheduleBundle);
+                    startActivity(scheduleIntent);
+
+                }
+            });
+            return view;
+        }
     }
 }

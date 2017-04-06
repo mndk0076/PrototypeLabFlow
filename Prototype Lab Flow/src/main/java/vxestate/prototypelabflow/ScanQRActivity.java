@@ -89,7 +89,7 @@ public class ScanQRActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         break;
                     case R.id.nav_request:
-                        Intent requestIntent = new Intent(getApplicationContext(), RequestItemActivity.class);
+                        Intent requestIntent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
                         Bundle requestBundle = new Bundle();
                         requestBundle.putString("student_num", Student_Num);
                         requestIntent.putExtras(requestBundle);
@@ -110,7 +110,7 @@ public class ScanQRActivity extends AppCompatActivity {
                         startActivity(usIntent);
                         break;
                     case R.id.nav_schedule:
-                        Intent scheduleIntent = new Intent(getApplicationContext(), ScheduleActivity.class);
+                        Intent scheduleIntent = new Intent(getApplicationContext(), TimeSlotActivity.class);
                         Bundle scheduleBundle = new Bundle();
                         scheduleBundle.putString("student_num", Student_Num);
                         scheduleIntent.putExtras(scheduleBundle);

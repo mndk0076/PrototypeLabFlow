@@ -49,7 +49,7 @@ public class AboutUsActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         break;
                     case R.id.nav_request:
-                        Intent requestIntent = new Intent(getApplicationContext(), RequestItemActivity.class);
+                        Intent requestIntent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
                         Bundle requestBundle = new Bundle();
                         requestBundle.putString("student_num", Student_Num);
                         requestIntent.putExtras(requestBundle);

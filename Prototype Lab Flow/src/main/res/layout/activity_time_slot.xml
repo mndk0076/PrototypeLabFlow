@@ -1,36 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_time_slot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="vxestate.prototypelabflow.TimeSlotActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/we"
+            android:id="@+id/imageView3"
+            android:layout_above="@+id/calendarView"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="20dp"
+            android:layout_marginBottom="30dp" />
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            app:mcv_showOtherDates="all"
+            app:mcv_selectionColor="#00F"
+            android:layout_height="350dp"
+            android:layout_width="350dp"
+            android:background="@color/common_google_signin_btn_text_dark_default"
+            android:layout_marginBottom="72dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="500dp">
 
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/name" />
+            android:id="@+id/name"
+            android:alpha="-1" />
 
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/student_num" />
+            android:id="@+id/student_num"
+            android:alpha="-1" />
     </LinearLayout>
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        android:id="@+id/calendarView"
-        android:layout_centerInParent="true"
-        app:mcv_showOtherDates="all"
-        app:mcv_selectionColor="#00F"
-        android:layout_height="350dp"
-        android:layout_width="350dp" />
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@id/navigation_view"
+        app:menu="@menu/navigation_menu"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/navigation_header">
 
-</RelativeLayout>
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

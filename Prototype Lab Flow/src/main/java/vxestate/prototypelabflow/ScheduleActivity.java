@@ -54,6 +54,7 @@ public class ScheduleActivity extends AppCompatActivity {
         set_time = (TextView) findViewById(R.id.set_time);
         student_num = (TextView)findViewById(R.id.student_num);
         schedulebtn = (Button)findViewById(R.id.schedulebtn);
+
         date.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -127,7 +128,7 @@ public class ScheduleActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         break;
                     case R.id.nav_request:
-                        Intent requestIntent = new Intent(getApplicationContext(), RequestItemActivity.class);
+                        Intent requestIntent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
                         Bundle requestBundle = new Bundle();
                         requestBundle.putString("student_num", Student_Num);
                         requestIntent.putExtras(requestBundle);

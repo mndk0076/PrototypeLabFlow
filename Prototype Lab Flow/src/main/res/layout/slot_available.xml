@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="38dp"
+        android:id="@+id/slot"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/background" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/slot"
+        android:layout_alignEnd="@+id/slot"
+        android:layout_marginTop="5dp"
+        android:id="@+id/time"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/background" />
+
+    <Button
+        android:text="Book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bookBtn"
+        android:layout_alignBottom="@+id/time"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="9dp"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
+</RelativeLayout>
