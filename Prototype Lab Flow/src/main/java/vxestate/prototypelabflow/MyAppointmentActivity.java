@@ -3,6 +3,7 @@ package vxestate.prototypelabflow;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -37,9 +38,9 @@ public class MyAppointmentActivity extends AppCompatActivity {
     private DrawerLayout mdrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     NavigationView navigationView;
-    TextView appointment, student_num, name;
+    TextView appointment, Student_num, name;
     String myAppointment_url = "http://prototypelabflow.esy.es/MyAppointment.php";
-    String slot, Student_num, Name;
+    String Student_Num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +48,24 @@ public class MyAppointmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_appointment);
 
         appointment = (TextView)findViewById(R.id.myAppointment);
-        student_num = (TextView)findViewById(R.id.student_num);
+        Student_num = (TextView)findViewById(R.id.student_num);
         name = (TextView)findViewById(R.id.name);
 
+        SharedPreferences sharedPref = getSharedPreferences("data", Context.MODE_PRIVATE);
+
+        String student_num = sharedPref.getString("student_num", "");
+        Student_num.setText(student_num);
+        Student_Num = Student_num.getText().toString();
+
+
+
+        /*
         Bundle bundle = getIntent().getExtras();
         student_num.setText(bundle.getString("student_num"));
         name.setText(bundle.getString("name"));
         Student_num = student_num.getText().toString();
         Name = name.getText().toString();
+        */
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, myAppointment_url, new Response.Listener<String>(){
             @Override
@@ -85,7 +96,7 @@ public class MyAppointmentActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("student_num", Student_num);
+                params.put("student_num", Student_Num);
                 return params;
             }
         };
@@ -109,31 +120,18 @@ public class MyAppointmentActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_request:
                         Intent requestIntent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
-                        Bundle requestBundle = new Bundle();
-                        requestBundle.putString("student_num", Student_num);
-                        requestIntent.putExtras(requestBundle);
                         startActivity(requestIntent);
                         break;
                     case R.id.nav_scan:
                         Intent qrIntent = new Intent(getApplicationContext(), ScanQRActivity.class);
-                        Bundle qrBundle = new Bundle();
-                        qrBundle.putString("student_num", Student_num);
-                        qrIntent.putExtras(qrBundle);
                         startActivity(qrIntent);
                         break;
                     case R.id.nav_schedule:
                         Intent scheduleIntent = new Intent(getApplicationContext(), TimeSlotActivity.class);
-                        Bundle scheduleBundle = new Bundle();
-                        scheduleBundle.putString("student_num", Student_num);
-                        scheduleBundle.putString("name", Name);
-                        scheduleIntent.putExtras(scheduleBundle);
                         startActivity(scheduleIntent);
                         break;
                     case R.id.nav_about:
                         Intent usIntent = new Intent(getApplicationContext(), AboutUsActivity.class);
-                        Bundle usBundle = new Bundle();
-                        usBundle.putString("student_num", Student_num);
-                        usIntent.putExtras(usBundle);
                         startActivity(usIntent);
                         break;
                     case R.id.nav_logout:

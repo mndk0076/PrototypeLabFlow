@@ -23,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/full_name"
-            android:text="Kenenth Mendoza"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textSize="25sp"
             android:gravity="center"
@@ -53,7 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/username"
-                android:text="mndk0076"
                 android:textSize="25sp"
                 android:layout_marginTop="70dp"
                 android:layout_marginStart="15dp" />
@@ -85,7 +83,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/student_num"
-                android:text="N00598007"
                 android:textSize="25sp"
                 android:layout_marginTop="25dp"
                 android:layout_marginStart="15dp" />

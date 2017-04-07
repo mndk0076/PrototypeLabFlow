@@ -16,13 +16,6 @@
         android:layout_marginRight="30dp">
 
         <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/student_num"
-            android:alpha="0" />
-
-        <TextView
             android:text="@string/about_us"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -97,12 +97,22 @@ public class MainActivity extends AppCompatActivity {
                                     loginPrefsEditor.putString("password", Password);
                                     loginPrefsEditor.commit();
                                     Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+
+                                    SharedPreferences sharedPref = getSharedPreferences("data", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPref.edit();
+                                    editor.putString("first_name", jsonObject.getString("first_name"));
+                                    editor.putString("last_name", jsonObject.getString("last_name"));
+                                    editor.putString("username", jsonObject.getString("username"));
+                                    editor.putString("student_num", jsonObject.getString("student_num"));
+                                    editor.apply();
+                                    /*
                                     Bundle bundle = new Bundle();
                                     bundle.putString("first_name", jsonObject.getString("first_name"));
                                     bundle.putString("last_name", jsonObject.getString("last_name"));
                                     bundle.putString("username", jsonObject.getString("username"));
                                     bundle.putString("student_num", jsonObject.getString("student_num"));
                                     intent.putExtras(bundle);
+                                    */
                                     startActivity(intent);
                                 }
                             } catch (JSONException e) {

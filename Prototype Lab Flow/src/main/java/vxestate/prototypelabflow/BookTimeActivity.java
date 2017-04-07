@@ -1,7 +1,9 @@
 package vxestate.prototypelabflow;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -32,7 +34,7 @@ public class BookTimeActivity extends AppCompatActivity {
     private DrawerLayout mdrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     NavigationView navigationView;
-    TextView student_num, name, DATE, TIME, test;
+    TextView Student_num, Name, DATE, TIME, test;
     String bookflow_url = "http://prototypelabflow.esy.es/BookFlow.php";
     Button bookBtn;
     String date, time, slot, NAME, STUDENT_NUM;
@@ -42,26 +44,35 @@ public class BookTimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_time);
 
-        student_num = (TextView)findViewById(R.id.student_num);
-        name = (TextView)findViewById(R.id.name);
+        Student_num = (TextView)findViewById(R.id.student_num);
+        Name = (TextView)findViewById(R.id.name);
         DATE = (TextView)findViewById(R.id.date);
         TIME = (TextView)findViewById(R.id.myAppointment);
         bookBtn = (Button)findViewById(R.id.bookBtn);
         test = (TextView)findViewById(R.id.test);
 
+        SharedPreferences sharedPref = getSharedPreferences("data", Context.MODE_PRIVATE);
+
+        String first_name = sharedPref.getString("first_name", "");
+        String last_name = sharedPref.getString("last_name", "");
+        String student_num = sharedPref.getString("student_num", "");
+
+        Name.setText(first_name +" " +last_name);
+        Student_num.setText(student_num);
+
+
         Bundle bundle = getIntent().getExtras();
-        student_num.setText(bundle.getString("student_num"));
-        name.setText(bundle.getString("name"));
         DATE.setText(bundle.getString("date"));
         TIME.setText(bundle.getString("time"));
+
 
         bookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 date = DATE.getText().toString();
                 time = TIME.getText().toString();
-                NAME = name.getText().toString();
-                STUDENT_NUM = student_num.getText().toString();
+                NAME = Name.getText().toString();
+                STUDENT_NUM = Student_num.getText().toString();
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, bookflow_url, new Response.Listener<String>(){
                     @Override
@@ -94,10 +105,6 @@ public class BookTimeActivity extends AppCompatActivity {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Intent scheduleIntent = new Intent(getApplicationContext(), TimeSlotActivity.class);
-                                                Bundle scheduleBundle = new Bundle();
-                                                scheduleBundle.putString("student_num", STUDENT_NUM);
-                                                scheduleBundle.putString("name", NAME);
-                                                scheduleIntent.putExtras(scheduleBundle);
                                                 startActivity(scheduleIntent);
                                             }
                                         });
@@ -148,31 +155,18 @@ public class BookTimeActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_request:
                         Intent requestIntent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
-                        Bundle requestBundle = new Bundle();
-                        requestBundle.putString("student_num", STUDENT_NUM);
-                        requestIntent.putExtras(requestBundle);
                         startActivity(requestIntent);
                         break;
                     case R.id.nav_scan:
                         Intent qrIntent = new Intent(getApplicationContext(), ScanQRActivity.class);
-                        Bundle qrBundle = new Bundle();
-                        qrBundle.putString("student_num", STUDENT_NUM);
-                        qrIntent.putExtras(qrBundle);
                         startActivity(qrIntent);
                         break;
                     case R.id.nav_schedule:
                         Intent scheduleIntent = new Intent(getApplicationContext(), TimeSlotActivity.class);
-                        Bundle scheduleBundle = new Bundle();
-                        scheduleBundle.putString("student_num", STUDENT_NUM);
-                        scheduleBundle.putString("name", NAME);
-                        scheduleIntent.putExtras(scheduleBundle);
                         startActivity(scheduleIntent);
                         break;
                     case R.id.nav_about:
                         Intent usIntent = new Intent(getApplicationContext(), AboutUsActivity.class);
-                        Bundle usBundle = new Bundle();
-                        usBundle.putString("student_num", STUDENT_NUM);
-                        usIntent.putExtras(usBundle);
                         startActivity(usIntent);
                         break;
                     case R.id.nav_logout:

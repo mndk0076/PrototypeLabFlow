@@ -29,11 +29,7 @@ public class TimeSlotActivity extends AppCompatActivity {
     private DrawerLayout mdrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     NavigationView navigationView;
-    TextView student_num, name;
-    TextView test;
-    Button mon_slot1, mon_slot2;
-    String NAME, STUDENT_NUM, Date, Time, Slot_Remaining, TEST;
-    String bookflow_url = "http://prototypelabflow.esy.es/BookFlow.php";
+    String NAME, STUDENT_NUM;
     String DATE;
 
     String[] slot = {"Slot 1:", "Slot 2:", "Slot 3:"};
@@ -43,16 +39,6 @@ public class TimeSlotActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_slot);
-
-        student_num = (TextView) findViewById(R.id.student_num);
-        name = (TextView) findViewById(R.id.name);
-
-        Bundle bundle = getIntent().getExtras();
-        student_num.setText(bundle.getString("student_num"));
-        name.setText(bundle.getString("name"));
-
-        NAME = name.getText().toString();
-        STUDENT_NUM = student_num.getText().toString();
 
         final MaterialCalendarView materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
 
@@ -101,31 +87,18 @@ public class TimeSlotActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_request:
                         Intent requestIntent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
-                        Bundle requestBundle = new Bundle();
-                        requestBundle.putString("student_num", STUDENT_NUM);
-                        requestIntent.putExtras(requestBundle);
                         startActivity(requestIntent);
                         break;
                     case R.id.nav_scan:
                         Intent qrIntent = new Intent(getApplicationContext(), ScanQRActivity.class);
-                        Bundle qrBundle = new Bundle();
-                        qrBundle.putString("student_num", STUDENT_NUM);
-                        qrIntent.putExtras(qrBundle);
                         startActivity(qrIntent);
                         break;
                     case R.id.nav_schedule:
                         Intent scheduleIntent = new Intent(getApplicationContext(), TimeSlotActivity.class);
-                        Bundle scheduleBundle = new Bundle();
-                        scheduleBundle.putString("student_num", STUDENT_NUM);
-                        scheduleBundle.putString("name", NAME);
-                        scheduleIntent.putExtras(scheduleBundle);
                         startActivity(scheduleIntent);
                         break;
                     case R.id.nav_about:
                         Intent usIntent = new Intent(getApplicationContext(), AboutUsActivity.class);
-                        Bundle usBundle = new Bundle();
-                        usBundle.putString("student_num", STUDENT_NUM);
-                        usIntent.putExtras(usBundle);
                         startActivity(usIntent);
                         break;
                     case R.id.nav_logout:
@@ -179,8 +152,6 @@ public class TimeSlotActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent scheduleIntent = new Intent(getApplicationContext(), BookTimeActivity.class);
                     Bundle scheduleBundle = new Bundle();
-                    scheduleBundle.putString("student_num", STUDENT_NUM);
-                    scheduleBundle.putString("name", NAME);
                     scheduleBundle.putString("date", DATE);
                     scheduleBundle.putString("time", times[i]);
                     scheduleIntent.putExtras(scheduleBundle);

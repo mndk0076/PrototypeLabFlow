@@ -3,7 +3,9 @@ package vxestate.prototypelabflow;
 //Sukhdeep Sehra (N01046228)
 //Matheus Almeida (N00739768)
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -32,10 +34,8 @@ public class ScanQRActivity extends AppCompatActivity {
     private DrawerLayout mdrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     NavigationView navigationView;
-    TextView qrDisplay, student_num, test;
+    TextView Student_num;
     String Student_Num;
-    EditText text;
-    Button gen_btn;
     ImageView image;
     String text2Qr;
 
@@ -43,23 +43,21 @@ public class ScanQRActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_qr);
-        //qrDisplay = (TextView)findViewById(R.id.qrDisplay);
+
+        Student_num = (TextView)findViewById(R.id.student_num);
+
+        SharedPreferences sharedPref = getSharedPreferences("data", Context.MODE_PRIVATE);
+
+        String student_num = sharedPref.getString("student_num", "");
+        Student_num.setText(student_num);
 
 
-
-
-
-        student_num = (TextView)findViewById(R.id.student_num);
-        Bundle bundle = getIntent().getExtras();
-        student_num.setText(bundle.getString("student_num"));
-
-        Student_Num = student_num.getText().toString();
+        Student_Num = Student_num.getText().toString();
 
         image = (ImageView) findViewById(R.id.image);
 
 
         text2Qr = Student_Num;
-                //student_num.getText().toString().trim();
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try{
             BitMatrix bitMatrix = multiFormatWriter.encode(text2Qr, BarcodeFormat.QR_CODE,200,200);
@@ -90,30 +88,18 @@ public class ScanQRActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_request:
                         Intent requestIntent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
-                        Bundle requestBundle = new Bundle();
-                        requestBundle.putString("student_num", Student_Num);
-                        requestIntent.putExtras(requestBundle);
                         startActivity(requestIntent);
                         break;
                     case R.id.nav_scan:
                         Intent qrIntent = new Intent(getApplicationContext(), ScanQRActivity.class);
-                        Bundle qrBundle = new Bundle();
-                        qrBundle.putString("student_num", Student_Num);
-                        qrIntent.putExtras(qrBundle);
                         startActivity(qrIntent);
                         break;
                     case R.id.nav_about:
                         Intent usIntent = new Intent(getApplicationContext(), AboutUsActivity.class);
-                        Bundle usBundle = new Bundle();
-                        usBundle.putString("student_num", Student_Num);
-                        usIntent.putExtras(usBundle);
                         startActivity(usIntent);
                         break;
                     case R.id.nav_schedule:
                         Intent scheduleIntent = new Intent(getApplicationContext(), TimeSlotActivity.class);
-                        Bundle scheduleBundle = new Bundle();
-                        scheduleBundle.putString("student_num", Student_Num);
-                        scheduleIntent.putExtras(scheduleBundle);
                         startActivity(scheduleIntent);
                         break;
                     case R.id.nav_logout:
