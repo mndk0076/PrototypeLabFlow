@@ -29,12 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MyAppointmentActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    RecyclerView.Adapter adapter;
-    RecyclerView.LayoutManager layoutManager;
-    ArrayList<Appointment> arrayList = new ArrayList<>();
     TextView appointment, student_num;
-    RequestQueue requestQueue;
     String myAppointment_url = "http://prototypelabflow.esy.es/MyAppointment.php";
     String slot, Student_num;
 
@@ -45,37 +40,6 @@ public class MyAppointmentActivity extends AppCompatActivity {
 
         appointment = (TextView)findViewById(R.id.myAppointment);
         student_num = (TextView)findViewById(R.id.student_num);
-        //requestQueue = Volley.newRequestQueue(this);
-
-        /*
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, myAppointment_url, (String)null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray jsonArray = response.getJSONArray("response");
-
-                    for (int i = 0; i<jsonArray.length(); i++){
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                        String date = jsonObject.getString("date");
-                        String time = jsonObject.getString("time");
-
-                        appointment.append(date+" "+time+"\n");
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MyAppointmentActivity.this,"Error",Toast.LENGTH_LONG).show();
-            }
-        });
-
-        requestQueue.add(jsonObjectRequest);
-        */
-
 
         Bundle bundle = getIntent().getExtras();
         student_num.setText(bundle.getString("student_num"));
@@ -113,15 +77,5 @@ public class MyAppointmentActivity extends AppCompatActivity {
             }
         };
         MySingleton.getMyInstance(MyAppointmentActivity.this).addToRequestque(stringRequest);
-        /*
-        recyclerView = (RecyclerView)findViewById(R.id.myAppointment);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        AppointmentRequest appointmentRequest = new AppointmentRequest(MyAppointmentActivity.this);
-        arrayList = appointmentRequest.getList();
-        adapter = new AppointmentAdapter(arrayList);
-        recyclerView.setAdapter(adapter);
-        */
     }
 }

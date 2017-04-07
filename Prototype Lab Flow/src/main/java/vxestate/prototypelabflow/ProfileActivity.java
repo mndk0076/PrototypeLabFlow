@@ -37,7 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         if(bundle != null) {
             full_name.setText(bundle.getString("first_name") + " " + bundle.getString("last_name"));
-            username.setText("Username: " + bundle.getString("username"));
+            username.setText(bundle.getString("username"));
             student_num.setText(bundle.getString("student_num"));
         }
 
