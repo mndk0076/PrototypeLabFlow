@@ -7,15 +7,15 @@
 
     <item android:id="@id/nav_request"
         android:icon="@drawable/ic_request"
-        android:title="Request Item"/>
+        android:title="My Appointment"/>
 
     <item android:id="@id/nav_scan"
         android:icon="@drawable/ic_qrcode"
-        android:title="Scan QR Codes"/>
+        android:title="Your QR Code"/>
 
     <item android:id="@id/nav_schedule"
         android:icon="@drawable/ic_schedule"
-        android:title="Schedule"/>
+        android:title="Book Schedule"/>
 
     <item android:id="@id/nav_about"
         android:icon="@drawable/ic_about_us"

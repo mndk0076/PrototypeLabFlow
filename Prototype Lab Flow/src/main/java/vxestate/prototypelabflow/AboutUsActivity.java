@@ -70,7 +70,7 @@ public class AboutUsActivity extends AppCompatActivity {
                         startActivity(usIntent);
                         break;
                     case R.id.nav_schedule:
-                        Intent scheduleIntent = new Intent(getApplicationContext(), ScheduleActivity.class);
+                        Intent scheduleIntent = new Intent(getApplicationContext(), TimeSlotActivity.class);
                         Bundle scheduleBundle = new Bundle();
                         scheduleBundle.putString("student_num", Student_Num);
                         scheduleIntent.putExtras(scheduleBundle);

@@ -12,11 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    TextView full_name, username, student_num;
+    TextView full_name, username, student_num, myAppointment, bookSchedule;
     String json_url = "http://prototypelabflow.esy.es/test.php";
     private DrawerLayout mdrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -32,6 +33,8 @@ public class ProfileActivity extends AppCompatActivity {
         full_name = (TextView) findViewById(R.id.full_name);
         username = (TextView) findViewById(R.id.username);
         student_num = (TextView) findViewById(R.id.student_num);
+        myAppointment = (TextView)findViewById(R.id.myAppointment);
+        bookSchedule = (TextView)findViewById(R.id.bookSchedule);
 
         Bundle bundle = getIntent().getExtras();
 
@@ -41,34 +44,28 @@ public class ProfileActivity extends AppCompatActivity {
             student_num.setText(bundle.getString("student_num"));
         }
 
-        /*
-        test = username.getText().toString();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, json_url, (String) null, new Response.Listener<JSONObject>() {
+        myAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(JSONObject response) {
-                try {
-                        first_name.setText(response.getString("first_name"));
-                        last_name.setText(response.getString("last_name"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+            public void onClick(View v) {
+                Intent requestIntent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
+                Bundle requestBundle = new Bundle();
+                requestBundle.putString("student_num", student_Num);
+                requestIntent.putExtras(requestBundle);
+                startActivity(requestIntent);
+            }
+        });
 
-            }}, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ProfileActivity.this,"Error",Toast.LENGTH_LONG).show();
-                        error.printStackTrace();
-                    }
-                }){
+        bookSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("username", test);
-                return params;
-                }};
-                MySingleton.getMyInstance(ProfileActivity.this).addToRequestque(jsonObjectRequest);
-
-                */
+            public void onClick(View v) {
+                Intent scheduleIntent = new Intent(getApplicationContext(), TimeSlotActivity.class);
+                Bundle scheduleBundle = new Bundle();
+                scheduleBundle.putString("student_num", student_Num);
+                scheduleBundle.putString("name", name);
+                scheduleIntent.putExtras(scheduleBundle);
+                startActivity(scheduleIntent);
+            }
+        });
 
         student_Num = student_num.getText().toString();
         name = full_name.getText().toString();
