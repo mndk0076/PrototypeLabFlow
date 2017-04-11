@@ -34,10 +34,10 @@ public class BookTimeActivity extends AppCompatActivity {
     private DrawerLayout mdrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     NavigationView navigationView;
-    TextView Student_num, Name, DATE, TIME, test;
+    TextView Student_num, Name, DATE, START, END, test;
     String bookflow_url = "http://prototypelabflow.esy.es/BookFlow.php";
     Button bookBtn;
-    String date, time, slot, NAME, STUDENT_NUM;
+    String date, start, end, slot, NAME, STUDENT_NUM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,8 @@ public class BookTimeActivity extends AppCompatActivity {
         Student_num = (TextView)findViewById(R.id.student_num);
         Name = (TextView)findViewById(R.id.name);
         DATE = (TextView)findViewById(R.id.date);
-        TIME = (TextView)findViewById(R.id.myAppointment);
+        START = (TextView)findViewById(R.id.start);
+        END = (TextView)findViewById(R.id.end);
         bookBtn = (Button)findViewById(R.id.bookBtn);
         test = (TextView)findViewById(R.id.test);
 
@@ -63,14 +64,16 @@ public class BookTimeActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         DATE.setText(bundle.getString("date"));
-        TIME.setText(bundle.getString("time"));
+        START.setText(bundle.getString("start"));
+        END.setText(bundle.getString("end"));
 
 
         bookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 date = DATE.getText().toString();
-                time = TIME.getText().toString();
+                start = START.getText().toString();
+                end = END.getText().toString();
                 NAME = Name.getText().toString();
                 STUDENT_NUM = Student_num.getText().toString();
 
@@ -129,7 +132,9 @@ public class BookTimeActivity extends AppCompatActivity {
                         params.put("name", NAME);
                         params.put("student_num", STUDENT_NUM);
                         params.put("date", date);
-                        params.put("time", time);
+                        params.put("start_time", start);
+                        params.put("end_time", end);
+                        params.put("id", "");
                         return params;
                     }
                 };

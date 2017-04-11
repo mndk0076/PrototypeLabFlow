@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
         full_name = (TextView) findViewById(R.id.full_name);
         Username = (TextView) findViewById(R.id.username);
         Student_num = (TextView) findViewById(R.id.student_num);
-        myAppointment = (TextView)findViewById(R.id.myAppointment);
+        myAppointment = (TextView)findViewById(R.id.start);
         bookSchedule = (TextView)findViewById(R.id.bookSchedule);
 
         SharedPreferences sharedPref = getSharedPreferences("data", Context.MODE_PRIVATE);

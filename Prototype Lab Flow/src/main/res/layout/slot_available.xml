@@ -13,28 +13,44 @@
         android:id="@+id/slot"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:layout_marginStart="10dp"
-        android:textColor="@color/background" />
+        android:textColor="@color/cardview_dark_background" />
 
-    <TextView
-        android:text="TextView"
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/slot"
-        android:layout_alignEnd="@+id/slot"
-        android:layout_marginTop="1dp"
-        android:id="@+id/myAppointment"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/background" />
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/slot"
+            android:layout_alignEnd="@+id/slot"
+            android:layout_marginTop="1dp"
+            android:id="@+id/start"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/cardview_dark_background" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/end"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@color/cardview_dark_background" />
+    </TableRow>
 
     <Button
         android:text="Book"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bookBtn"
-        android:layout_alignBottom="@+id/myAppointment"
+        android:backgroundTint="@color/blue"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:layout_alignTop="@+id/slot"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="9dp"
-        android:backgroundTint="@color/colorAccent"
-        android:textColor="@color/common_google_signin_btn_text_dark_default" />
+        android:layout_marginEnd="11dp"
+        android:layout_marginTop="20dp" />
 </RelativeLayout>

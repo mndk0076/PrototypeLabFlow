@@ -105,14 +105,6 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("username", jsonObject.getString("username"));
                                     editor.putString("student_num", jsonObject.getString("student_num"));
                                     editor.apply();
-                                    /*
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("first_name", jsonObject.getString("first_name"));
-                                    bundle.putString("last_name", jsonObject.getString("last_name"));
-                                    bundle.putString("username", jsonObject.getString("username"));
-                                    bundle.putString("student_num", jsonObject.getString("student_num"));
-                                    intent.putExtras(bundle);
-                                    */
                                     startActivity(intent);
                                 }
                             } catch (JSONException e) {

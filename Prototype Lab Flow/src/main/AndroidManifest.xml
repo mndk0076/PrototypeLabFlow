@@ -24,16 +24,15 @@
             android:name=".ProfileActivity"
             android:label="Profile" />
         <activity
-            android:name=".ScheduleActivity"
-            android:label="Schedule" />
-        <activity
             android:name=".ScanQRActivity"
-            android:label="Scan QR Codes" />
+            android:label="My QR Code" />
         <activity
             android:name=".AboutUsActivity"
             android:label="About Us" />
-        <activity android:name=".TimeSlotActivity" />
-        <activity android:name=".BookTimeActivity" />
+        <activity android:name=".TimeSlotActivity"
+            android:label="Book Schedule"/>
+        <activity android:name=".BookTimeActivity"
+            android:label="Schedule Summary"/>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -42,7 +41,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".MyAppointmentActivity"></activity>
+        <activity android:name=".MyAppointmentActivity"
+            android:label="My Appointment"></activity>
     </application>
 
 </manifest>

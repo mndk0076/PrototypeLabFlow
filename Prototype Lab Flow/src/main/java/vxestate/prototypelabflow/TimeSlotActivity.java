@@ -32,8 +32,9 @@ public class TimeSlotActivity extends AppCompatActivity {
     String NAME, STUDENT_NUM;
     String DATE;
 
-    String[] slot = {"Slot 1:", "Slot 2:", "Slot 3:"};
-    String[] times = {"8:00 AM - 9:45 AM", "9:50 AM - 11:35 AM", "11:40 AM - 12:25 PM"};
+    String[] slot = {"Slot 1:", "Slot 2:", "Slot 3:", "Slot 4:"};
+    String[] start = {"08:00 AM", "09:50 AM", "11:40 AM", "01:30 PM"};
+    String[] end = {"09:45 AM", "11:35 AM", "12:25 AM", "02:45 PM"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,11 +142,13 @@ public class TimeSlotActivity extends AppCompatActivity {
         public View getView(final int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.slot_available, null);
             TextView textView_name = (TextView)view.findViewById(R.id.slot);
-            TextView textView_description = (TextView)view.findViewById(R.id.myAppointment);
+            TextView textView_start = (TextView)view.findViewById(R.id.start);
+            TextView textView_end = (TextView)view.findViewById(R.id.end);
             Button btnBook = (Button)view.findViewById(R.id.bookBtn);
 
             textView_name.setText(slot[i]);
-            textView_description.setText(times[i]);
+            textView_start.setText(start[i]+" - ");
+            textView_end.setText(end[i]);
 
             btnBook.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -153,7 +156,8 @@ public class TimeSlotActivity extends AppCompatActivity {
                     Intent scheduleIntent = new Intent(getApplicationContext(), BookTimeActivity.class);
                     Bundle scheduleBundle = new Bundle();
                     scheduleBundle.putString("date", DATE);
-                    scheduleBundle.putString("time", times[i]);
+                    scheduleBundle.putString("start", start[i]);
+                    scheduleBundle.putString("end", end[i]);
                     scheduleIntent.putExtras(scheduleBundle);
                     startActivity(scheduleIntent);
 
